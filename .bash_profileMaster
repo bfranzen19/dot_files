@@ -1,0 +1,19 @@
+PS1="\n\W: "
+
+alias gacm="git add -A; git commit -m"
+alias gts="git status"
+alias gpom="git push origin master"
+
+alias lsl="ls -l"
+alias lsa="ls -a"
+alias las="ls -a"
+alias lsal="ls -al"
+
+alias ..="cd ../"
+alias ...="cd .../"
+alias ....="cd ..../"
+
+function cdl {
+  cd "$1"
+  ls
+}
