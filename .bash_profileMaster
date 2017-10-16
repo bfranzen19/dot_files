@@ -1,18 +1,33 @@
 PS1="\n\W: "
 
-alias gacm="git add -A; git commit -m"
+# open server
+alias serv="http-server"
+
+# git commands
+alias gacm="git add -A; git commit -m "
 alias gts="git status"
 alias gpom="git push origin master"
 
+# ls commands
 alias lsl="ls -l"
 alias lsa="ls -a"
 alias las="ls -a"
 alias lsal="ls -al"
 
-alias ..="cd ../"
-alias ...="cd .../"
-alias ....="cd ..../"
+# simple navigation
+alias ..="cdl ../"
+alias ...="cdl ../../"
+alias ....="cdl ../../../"
+alias ~="cdl ~/"
 
+# common filepaths
+alias doc="cdl ~/Documents"
+alias desk="cdl ~/Desktop"
+alias proj="cdl ~/projects"
+alias down="cdl ~/Downloads"
+alias .bash="atom cd ~/.bash_profile"
+
+# changes directories and lists all files in the new directory
 function cdl {
   cd "$1"
   ls
