@@ -7,6 +7,10 @@ alias serv="http-server"
 alias gacm="git add -A; git commit -m "
 alias gts="git status"
 alias gpom="git push origin master"
+alias gpod="git push origin dev"
+alias gpod="git push origin dev"
+alias pull="git pull origin master"
+alias pulldev="git pull origin dev"
 
 # ls commands
 alias lsl="ls -l"
