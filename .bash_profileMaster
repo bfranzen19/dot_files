@@ -6,11 +6,19 @@ alias serv="http-server"
 # git commands
 alias gacm="git add -A; git commit -m "
 alias gts="git status"
+
 alias gpom="git push origin master"
 alias gpod="git push origin dev"
-alias gpod="git push origin dev"
+
 alias pull="git pull origin master"
 alias pulldev="git pull origin dev"
+
+alias gb="git branch"
+alias gd="git branch -d "
+alias gD="git branch -D "
+
+alias nb="git checkout -b "
+alias gc="git checkout "
 
 # ls commands
 alias lsl="ls -l"
@@ -36,3 +44,9 @@ function cdl {
   cd "$1"
   ls
 }
+
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
