@@ -4,4 +4,4 @@ secrets.js
 .DS_Store
 build
 npm-debug.log
-.DS_Store
+
