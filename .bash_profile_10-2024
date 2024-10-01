@@ -1,0 +1,200 @@
+### ----- other ----- ###
+PS1="\n\W: "
+alias whatsrunningon='_wro(){ lsof -i tcp:"$1"; }; _wro'                    ## <PORT> # shows what's running
+alias killcode="ps -ef | grep code | awk {'print $2'} | xargs kill -9"      ## <PID>  # kills the process
+alias refresh="source ~/.bash_profile"                                      ## reloads bash_profile
+
+
+### ----- aliases ----- ###
+### fix it
+alias rmi="rimraf .idea/ && rimraf ../.idea/"
+alias da="direnv allow ."
+alias use="nvm use"                             ## sets the correct node version
+alias brewI="arch -arm64 brew install "         ## <package_name>
+
+### mongo commands
+alias start="brew services start mongodb-community"
+alias stop="brew services stop mongodb-community"
+alias brewlist="brew services list"
+alias restart="brew services restart mongodb-community"
+
+### npm commands
+alias ns="npm start"
+alias nbuild="npm run build"
+alias ntest="npm test"
+alias use="nvm use"                             ## <N/A> # default OR <VERSION> # that version
+alias nr="npm run"                              ## <script_name>
+alias go="nbuild && ns"
+
+### yarn commands
+alias ys="yarn start"                           ## starts the server
+alias yi="nvm use && yarn install"              ## sets the correct node version and installs via yarn
+alias y="nvm use && yarn install && yarn start" ## sets node v, installs, and runs
+alias y_c="yarn cache clean"
+
+
+### ----- docker ----- ###
+alias dc="docker-compose "                      ## add flags after
+alias up="docker-compose up"                    ## up
+alias upd="docker-compose up -d"                ## up detached
+alias down="docker-compose down"                ## down
+alias dbuild="docker-compose build"             ## build
+alias db="docker-compose up --build"            ## up, build
+alias dreset="docker-compose pull && docker-compose rm -f && docker-compose up --build"
+
+
+### ----- python ----- ###
+alias python="python3 "
+alias pip="pip3"
+alias reqs="pip3 install -r requirements.txt"   ## installs reqs in `requirements.txt`
+
+## anaconda
+alias c="conda "                                ## anaconda commands
+alias ca="conda activate"                       ## activate anaconda
+alias cda="conda deactivate"                    ## make `(base)` go away in terminal
+
+## dbt
+alias d="dbt "                                  ## dbt commands
+
+
+### ----- git ----- ###
+## pulling
+alias gp="git pull origin "                     ## <branch_name>  # pulls the remote origin
+alias pull="git pull origin "                   ## <branch_name>  # same as `gp`
+
+## branches
+alias gb="git branch"                           ## shows branch names
+alias gc="git checkout "                        ## <branch_name>  # checks out branch
+alias nb="git checkout -b "                     ## <branch_name>  # creates a new branch and checks it out
+alias gd="git branch -D "                       ## <branch_name>  # deletes a branch
+
+## adding && committing
+alias gts="git status"                          ## shows the status of the branch
+alias ga="git add "                             ## <file_path(s)> adds listed changed files to staging
+alias gaa="git add ."                           ## adds all changed files to staging
+alias gcm="git commit -m "                      ## <"commit message">
+alias gacm="git add . && git commit -m "        ## <"commit message">
+
+## rebase
+alias rb="git pull --rebase origin "            ## <branch_name>  # rebases the branch
+alias rbc="git rebase --continue"               ## continues rebase after conflicts are resolved
+
+## stashing
+alias gstash="git stash -u"                     ## stashes changes 
+alias gapply="git stash apply"                  ## applies changes on top of remote changes
+
+## pushing
+alias gpo="git push origin"                     ## <branch_name>  # pushes to the remote
+alias push="git push origin "                   ## <branch_name>  # same as `gpo`
+
+
+### ----- navigation ----- ###
+### simple navigation
+alias lsl="ls -l"
+alias lsa="ls -a"
+alias las="ls -a"
+alias lsal="ls -al"
+alias ..="cdl ../"
+alias ...="cdl ../../"
+alias ....="cdl ../../../"
+alias ~="cdl ~/"
+
+### common directories
+alias b="code ~/.bash_profile"
+alias desk="cdl ~/Desktop"
+alias dl="cdl ~/Downloads"
+alias proj="cd ~/projects/"
+
+### t21 repos 
+## local
+alias dbt="cdl ~/projects/dbt-t21-analytics"
+alias py_util="cdl ~/projects/py-utilities"
+
+## github
+alias dbt_repo="open https://github.com/TIGER21-LLC/dbt-t21-analytics"
+alias py_util_repo="open https://github.com/TIGER21-LLC/py-utilities"
+
+
+### ----- functions ----- ###
+### changes directories and lists all files in the new directory
+function cdl {
+    cd "$1"
+    ls
+}
+
+### open webstorm
+function ws {
+    if [ $# -eq 0 ] ; then 
+        open -na "WebStorm.app" --args "."
+    else 
+        open -na "WebStorm.app" --args "$@"
+    fi
+}
+
+### open pycharm
+function pc {
+    if [ $# -eq 0 ] ; then 
+        open -na "PyCharm.app" --args "."
+    else 
+        open -na "PyCharm.app" --args "$@"
+    fi
+}
+
+### open dataspell
+function ds {
+    if [ $# -eq 0 ] ; then 
+        open -na "DataSpell.app" --args "."
+    else 
+        open -na "DataSpell.app" --args "$@"
+    fi
+}
+
+### open datagrip
+function dg {
+    if [ $# -eq 0 ] ; then 
+        open -na "DataGrip.app" --args "."
+    else 
+        open -na "DataGrip.app" --args "$@"
+    fi
+}
+
+### new node version
+function n_v {
+    if [ $# -eq 0 ] ; then 
+        nvm use
+    else 
+        echo -e "\ninstalling $1\n" && nvm install $1
+        echo -e "\nsetting $1 as default\n" && nvm alias default $1
+        nvm use default && echo -e -n "\ndefault: $1\nnode -v: " && node -v
+    fi
+}
+
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+
+
+### --------------------------------------------------------------------------###
+
+### ----- anaconda ----- ###
+## >>> conda initialize >>>
+## !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+## <<< conda initialize <<<
+
+### ----- homebrew ----- ###
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+### ----- nvm ----- ###
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
